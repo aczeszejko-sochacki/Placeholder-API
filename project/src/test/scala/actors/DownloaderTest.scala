@@ -3,7 +3,6 @@ package placeholder.actors
 import akka.actor._
 import akka.testkit._
 import org.scalatest._
-import java.net.{ UnknownHostException => Unknown, MalformedURLException => Malformed }
 
 class DownloadActorTest extends TestKit(ActorSystem("Test"))
   with FlatSpecLike
