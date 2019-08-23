@@ -3,6 +3,7 @@ package placeholder.actors
 import akka.actor._
 import akka.testkit._
 import org.scalatest._
+import java.io._
 
 class DownloadActorTest extends TestKit(ActorSystem("Test"))
   with FlatSpecLike
@@ -21,6 +22,10 @@ class DownloadActorTest extends TestKit(ActorSystem("Test"))
     downloadActor ! DownloadActor.Download(url, ".", "a")
         
     expectMsg(DownloadManagerActor.UrlDownloaded(url))
+
+    // Remove the created file
+    val tmpFile = new File("./a.json")
+    tmpFile.delete
   }
 
   it should "send Error message given wrong url or path" in {
