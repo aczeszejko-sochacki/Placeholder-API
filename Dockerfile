@@ -33,6 +33,3 @@ RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.lis
 WORKDIR ./app
 
 ADD /project /app
-
-# Run app
-RUN sbt run
