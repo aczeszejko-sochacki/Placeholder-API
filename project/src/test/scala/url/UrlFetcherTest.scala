@@ -1,7 +1,6 @@
 package placeholder.url
 
 import org.scalatest._
-import org.scalamock.scalatest.MockFactory
 import java.lang.{ StringIndexOutOfBoundsException => OutOfBounds }
 import java.net.{ UnknownHostException => Unknown, MalformedURLException => Malformed }
 
