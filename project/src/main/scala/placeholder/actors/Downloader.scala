@@ -9,18 +9,19 @@ class DownloadActor extends Actor with UrlFetcher with FileSaver {
   def receive = downloading
 
   def downloading: Actor.Receive = {
-    case DownloadActor.DownloadAndSave(url, savePath, fileName) => try {
-      SaveAsJson(fetchUrlAsString(url), savePath, fileName)
-      sender ! "message todo in sender"
-    }
-    catch {
-      case e: Exception => sender ! "message todo in sender"
-    }
+    case DownloadActor.Download(url, savePath, fileName) => 
+      try {
+          SaveAsJson(fetchUrlAsString(url), savePath, fileName)
+          sender ! DownloadManagerActor.UrlDownloaded(url)
+        }
+      catch {
+        case e: Exception => sender ! DownloadManagerActor.Error(e)
+      }
   }
 }
 
 object DownloadActor {
   def props = Props(new DownloadActor)
 
-  case class DownloadAndSave(url: String, savePath: String, fileName: String)
+  case class Download(url: String, savePath: String, fileName: String)
 }
